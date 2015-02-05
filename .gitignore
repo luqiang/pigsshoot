@@ -1,0 +1,6 @@
+*.csproj
+*.csproj.user
+*.config
+bin-debug/
+libs/
+obj/
