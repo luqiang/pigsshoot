@@ -1,13 +1,24 @@
 {
-"resources":
-	[
-		{"name":"bgImage","type":"image","url":"assets/bg.jpg"},
-		{"name":"egretIcon","type":"image","url":"assets/egret_icon.png"},
-        {"name":"description","type":"json","url":"config/description.json"}
-	],
-
-"groups":
-	[
-        {"name":"preload","keys":"bgImage,egretIcon"}
-	]
+	"groups":[
+	{
+		"keys":"balloon_json,wolf_json,commonsheet",
+		"name":"common"
+	}],
+	"resources":[
+	{
+		"name":"balloon_json",
+		"type":"json",
+		"url":"balloon_ac282a27.json"
+	},
+	{
+		"name":"wolf_json",
+		"type":"json",
+		"url":"wolf_ca73c882.json"
+	},
+	{
+		"name":"commonsheet",
+		"subkeys":"wolf_png,top_pig_png,qiqiu_png,pig_png,lang_png,langDie_png,jian_png,heart_png,boom_png,bg_png,balloon_png",
+		"type":"sheet",
+		"url":"groups/commonsheet_fa87261.json"
+	}]
 }

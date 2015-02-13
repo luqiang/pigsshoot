@@ -4,3 +4,5 @@
 bin-debug/
 libs/
 obj/
+bin/
+release/
