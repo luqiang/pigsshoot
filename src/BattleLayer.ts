@@ -7,7 +7,8 @@
     private btnDown_down: egret.Bitmap;
 
 
-    private line: egret.Shape;
+    private line: egret.Bitmap;
+   
     private fireBtn: egret.Bitmap;
     private fireBtn_down: egret.Bitmap;
     private speed: number = 0;
@@ -45,6 +46,7 @@
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
         this.init();
         this.addEvent();
+      
 
     }
 
@@ -55,7 +57,7 @@
         this.addChild(this.pigShoot);
         this.pigShoot.x = 70;
         this.pigShoot.y = 120;
-       
+        this.drawLine();
 
     }
     private init(): void {
@@ -87,8 +89,12 @@
         this.btnDown.y = 660;
 
 
-        this.line = new egret.Shape();
+        this.line = new egret.Bitmap();
+        this.line.texture = RES.getRes("line_png");
         this.addChild(this.line);
+        this.line.x = 94;
+        this.line.y = 115;
+
 
         this.fireBtn_down = new egret.Bitmap();
         this.fireBtn_down.texture = RES.getRes("firebtn_down_png");
@@ -130,6 +136,8 @@
         this.wolfNumberTxt.x = this.wolfIco.x + 30;
         this.wolfNumberTxt.y = this.wolfIco.y;
         this.wolfNumberTxt.text = "X" + this.wolfNumber;
+
+     
     }
 
     private addEvent(): void {
@@ -150,7 +158,7 @@
         this.myTime.addEventListener(egret.TimerEvent.TIMER, this.createWolf, this);
         this.myTime.addEventListener(egret.TimerEvent.TIMER_COMPLETE, this.wolfRunOver, this);
         this.myTime.start();
-        
+       
         
     }
     private removeEvent(): void {
@@ -434,10 +442,9 @@
         this.pigShoot.visible = !this.pigShoot.visible;
     }
     private drawLine(): void {
-        this.line.graphics.clear();
-        this.line.graphics.lineStyle(2, 0xFF0000);
-        this.line.graphics.moveTo(95, 115);
-        this.line.graphics.lineTo(95, this.pigShoot.y);
+
+        var tempHeight: number = this.pigShoot.y - 95;
+        this.line.height = tempHeight;
     }
 
 
