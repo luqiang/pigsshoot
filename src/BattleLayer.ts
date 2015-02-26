@@ -1,10 +1,15 @@
 ﻿class BattleLayer extends egret.Sprite {
 
     private pigShoot: egret.Bitmap;
-    private btnUp: egret.Shape;
-    private btnDown: egret.Shape;
+    private btnUp: egret.Bitmap;
+    private btnDown: egret.Bitmap;
+    private btnUp_down: egret.Bitmap;
+    private btnDown_down: egret.Bitmap;
+
+
     private line: egret.Shape;
-    private fireBtn: egret.Shape;
+    private fireBtn: egret.Bitmap;
+    private fireBtn_down: egret.Bitmap;
     private speed: number = 0;
     private arrowArray: egret.Bitmap[] = new Array();
     private runArrowArray: egret.Bitmap[] = new Array();
@@ -54,38 +59,51 @@
 
     }
     private init(): void {
-        this.btnUp = new egret.Shape();
-        this.btnUp.graphics.beginFill(0xFF0000,0.2);
-        this.btnUp.graphics.drawCircle(30, 30, 30);
-        this.btnUp.graphics.endFill();
+
+        this.btnUp_down = new egret.Bitmap();
+        this.btnUp_down.texture = RES.getRes("upbtn_down_png");
+        this.addChild(this.btnUp_down);
+        this.btnUp_down.x = 50;
+        this.btnUp_down.y = 580;
+
+        this.btnUp = new egret.Bitmap();
+        this.btnUp.texture = RES.getRes("upbtn_png");
         this.btnUp.touchEnabled = true;
         this.addChild(this.btnUp);
         this.btnUp.x = 50;
         this.btnUp.y = 580;
-        this.btnUp.width = this.btnUp.height = 60;
 
-        this.btnDown = new egret.Shape();
-        this.btnDown.graphics.beginFill(0x00FF00,0.2);
-        this.btnDown.graphics.drawCircle(30, 30, 30);
-        this.btnDown.graphics.endFill();
+        this.btnDown_down = new egret.Bitmap();
+        this.btnDown_down.texture = RES.getRes("downbtn_down_png");
+        this.addChild(this.btnDown_down);
+        this.btnDown_down.x = 50;
+        this.btnDown_down.y = 660;
+
+        this.btnDown = new egret.Bitmap();
+        this.btnDown.texture = RES.getRes("downbtn_png");
         this.btnDown.touchEnabled = true;
         this.addChild(this.btnDown);
         this.btnDown.x = 50;
         this.btnDown.y = 660;
-        this.btnDown.width = this.btnDown.height = 60;
+
 
         this.line = new egret.Shape();
         this.addChild(this.line);
 
-        this.fireBtn = new egret.Shape();
-        this.fireBtn.graphics.beginFill(0x0000FF,0.2);
-        this.fireBtn.graphics.drawCircle(30, 30, 30);
-        this.fireBtn.graphics.endFill();
+        this.fireBtn_down = new egret.Bitmap();
+        this.fireBtn_down.texture = RES.getRes("firebtn_down_png");
+        this.addChild(this.fireBtn_down);
+        this.fireBtn_down.x = 370;
+        this.fireBtn_down.y = 620;
+
+
+        this.fireBtn = new egret.Bitmap();
+        this.fireBtn.texture = RES.getRes("firebtn_png");
         this.fireBtn.touchEnabled = true;
         this.addChild(this.fireBtn);
-        this.fireBtn.x = 380;
+        this.fireBtn.x = 370;
         this.fireBtn.y = 620;
-        this.fireBtn.width = this.fireBtn.height = 60;
+
 
         this.pig_heartBitmap = new egret.Bitmap();
         this.pig_heartBitmap.texture = RES.getRes("heart_png");
@@ -124,7 +142,10 @@
         this.btnDown.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.downHandler, this);
 
         this.addEventListener(egret.Event.ENTER_FRAME, this.onFrameHandler, this);
-        this.fireBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onFire, this);
+
+        this.fireBtn.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onFire, this);
+        this.fireBtn.addEventListener(egret.TouchEvent.TOUCH_END, this.onFire, this);
+        this.fireBtn.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.onFire, this);
 
         this.myTime.addEventListener(egret.TimerEvent.TIMER, this.createWolf, this);
         this.myTime.addEventListener(egret.TimerEvent.TIMER_COMPLETE, this.wolfRunOver, this);
@@ -142,37 +163,58 @@
         this.btnDown.removeEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.downHandler, this);
 
         this.removeEventListener(egret.Event.ENTER_FRAME, this.onFrameHandler, this);
-        this.fireBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onFire, this);
+        this.fireBtn.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onFire, this);
+        this.fireBtn.removeEventListener(egret.TouchEvent.TOUCH_END, this.onFire, this);
+        this.fireBtn.removeEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.onFire, this);
 
         this.myTime.stop();
         this.myTime.removeEventListener(egret.TimerEvent.TIMER, this.createWolf, this);
         this.myTime.removeEventListener(egret.TimerEvent.TIMER_COMPLETE, this.wolfRunOver, this);
 
+
+        this.btnUp.visible = true;
+        this.btnDown.visible = true;
+        this.fireBtn.visible = true;
+        this.speed = 0;
     }
 
     private onFire(evt: egret.TouchEvent): void {
-        var tempArrow: egret.Bitmap = this.getArrow();
-        this.addChild(tempArrow);
-        tempArrow.visible = true;
-        tempArrow.rotation = 0;
-        tempArrow.x = this.pigShoot.width+60;
-        tempArrow.y = this.pigShoot.y+30;
-        this.runArrowArray.push(tempArrow);
+        if (evt.type == egret.TouchEvent.TOUCH_BEGIN) {
+            var tempArrow: egret.Bitmap = this.getArrow();
+            this.addChild(tempArrow);
+            tempArrow.visible = true;
+            tempArrow.rotation = 0;
+            tempArrow.x = this.pigShoot.width + 60;
+            tempArrow.y = this.pigShoot.y + 30;
+            this.runArrowArray.push(tempArrow);
+            this.fireBtn.visible = false;
+        } else {
+            this.fireBtn.visible = true;
+        }
+
 
     }
     private upHandler(evt: egret.TouchEvent): void {
       
         if (evt.type == egret.TouchEvent.TOUCH_BEGIN) {
             this.speed = -4;
+            if (this.btnUp.visible == true) {
+                this.btnUp.visible = false;
+            }
         } else if (evt.type == egret.TouchEvent.TOUCH_END || evt.type == egret.TouchEvent.TOUCH_RELEASE_OUTSIDE) {           
             this.speed = 0;
+            this.btnUp.visible = true;
         }
     }
     private downHandler(evt: egret.TouchEvent): void {
         if (evt.type == egret.TouchEvent.TOUCH_BEGIN) {
             this.speed = 4;
+            if (this.btnDown.visible == true) {
+                this.btnDown.visible = false;
+            }
         } else if (evt.type == egret.TouchEvent.TOUCH_END || evt.type == egret.TouchEvent.TOUCH_RELEASE_OUTSIDE) {
             this.speed = 0;
+            this.btnDown.visible = true;
         }
     }
     private onFrameHandler(evt: egret.Event): void {

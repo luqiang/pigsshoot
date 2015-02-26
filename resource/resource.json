@@ -17,8 +17,8 @@
 	},
 	{
 		"name":"commonsheet",
-		"subkeys":"wolf_png,upbtn_png,upbtn_down_png,top_pig_png,qiqiu_png,pig_png,lang_png,langDie_png,jian_png,heart_png,firebtn_png,firebtn_down_png,downbtn_png,downbtn_down_png,boom_png,bg_png,balloon_png",
+		"subkeys":"wolf_png,upbtn_png,upbtn_down_png,top_pig_png,qiqiu_png,pig_png,lang_png,langDie_png,jian_png,heart_png,firebtn_png,firebtn_down_png,downbtn_png,downbtn_down_png,dialog_png,boom_png,bg_png,balloon_png",
 		"type":"sheet",
-		"url":"groups/commonsheet_8b46ec6e.json"
+		"url":"groups/commonsheet_b7d00441.json"
 	}]
 }

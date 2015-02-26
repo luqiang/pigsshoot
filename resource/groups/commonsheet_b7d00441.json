@@ -1,5 +1,5 @@
 {
-	"file":"commonsheet_641693c7.png",
+	"file":"commonsheet_bd05a350.png",
 	"frames":
 	{
 		"balloon_png":
@@ -35,18 +35,18 @@
 			"x":982,
 			"y":329
 		},
-		"downbtn_down_png":
+		"dialog_png":
 		{
-			"h":82,
-			"offX":0,
-			"offY":0,
-			"sourceH":82,
-			"sourceW":86,
-			"w":86,
-			"x":919,
-			"y":196
+			"h":196,
+			"offX":2,
+			"offY":2,
+			"sourceH":200,
+			"sourceW":300,
+			"w":296,
+			"x":2,
+			"y":1286
 		},
-		"downbtn_png":
+		"downbtn_down_png":
 		{
 			"h":82,
 			"offX":0,
@@ -57,7 +57,7 @@
 			"x":919,
 			"y":110
 		},
-		"firebtn_down_png":
+		"downbtn_png":
 		{
 			"h":82,
 			"offX":0,
@@ -66,6 +66,17 @@
 			"sourceW":86,
 			"w":86,
 			"x":896,
+			"y":506
+		},
+		"firebtn_down_png":
+		{
+			"h":82,
+			"offX":0,
+			"offY":0,
+			"sourceH":82,
+			"sourceW":86,
+			"w":86,
+			"x":806,
 			"y":420
 		},
 		"firebtn_png":
@@ -76,8 +87,8 @@
 			"sourceH":82,
 			"sourceW":86,
 			"w":86,
-			"x":806,
-			"y":420
+			"x":919,
+			"y":196
 		},
 		"heart_png":
 		{
@@ -164,7 +175,7 @@
 			"sourceH":82,
 			"sourceW":86,
 			"w":86,
-			"x":896,
+			"x":806,
 			"y":506
 		},
 		"upbtn_png":
@@ -175,8 +186,8 @@
 			"sourceH":82,
 			"sourceW":86,
 			"w":86,
-			"x":806,
-			"y":506
+			"x":896,
+			"y":420
 		},
 		"wolf_png":
 		{
